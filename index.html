@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الردود المفحمة على منكري السنة المطهرة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eaeaea;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #e94560;
+        }
+        
+        h1 {
+            color: #e94560;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .author {
+            color: #a0a0a0;
+            font-size: 1.2em;
+        }
+        
+        .index-section {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(233, 69, 96, 0.3);
+        }
+        
+        .index-title {
+            color: #e94560;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #e94560;
+            padding-bottom: 10px;
+        }
+        
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .chapter-btn {
+            background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chapter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+        
+        .chapter-number {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .content-section {
+            background: rgba(255,255,255,0.03);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: #e94560;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e94560;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #0f3460;
+            color: white;
+            border: 2px solid #e94560;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #e94560;
+            transform: scale(1.05);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .back-to-index {
+            background: #e94560;
+            margin-bottom: 20px;
+        }
+        
+        .arabic-text {
+            font-size: 1.3em;
+            line-height: 2;
+            text-align: justify;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .chapters-grid { grid-template-columns: 1fr; }
+            .content-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>الردود المفحمة على منكري السنة المطهرة</h1>
+            <p class="author">للإمام ابن القيم رحمه الله</p>
+        </header>
+
+        <!-- الفهرس -->
+        <div id="index" class="index-section">
+            <h2 class="index-title">📚 فهرس الكتاب</h2>
+            <div class="chapters-grid">
+                <button class="chapter-btn" onclick="showSection(1)">
+                    <span>المقدمة</span>
+                    <span class="chapter-number">1</span>
+                </button>
+                <button class="chapter-btn" onclick="showSection(2)">
+                    <span>باب في وجوب اتباع السنة</span>
+                    <span class="chapter-number">2</span>
+                </button>
+                <button class="chapter-btn" onclick="showSection(3)">
+                    <span>باب في بيان أهمية السنة</span>
+                    <span class="chapter-number">3</span>
+                </button>
+                <button class="chapter-btn" onclick="showSection(4)">
+                    <span>الرد على شبهات المنكرين</span>
+                    <span class="chapter-number">4</span>
+                </button>
+                <button class="chapter-btn" onclick="showSection(5)">
+                    <span>باب في حجية الحديث</span>
+                    <span class="chapter-number">5</span>
+                </button>
+                <button class="chapter-btn" onclick="showSection(6)">
+                    <span>باب في علوم الحديث</span>
+                    <span class="chapter-number">6</span>
+                </button>
+                <button class="chapter-btn" onclick="showSection(7)">
+                    <span>الرد على المستشرقين</span>
+                    <span class="chapter-number">7</span>
+                </button>
+                <button class="chapter-btn" onclick="showSection(8)">
+                    <span>الخاتمة</span>
+                    <span class="chapter-number">8</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- المحتوى -->
+        <div id="section-1" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">المقدمة</h2>
+            <div class="arabic-text">
+                <p>الحمد لله رب العالمين، والصلاة والسلام على سيدنا محمد وعلى آله وصحبه أجمعين...</p>
+                <p>فإن أصدق الحديث كتاب الله، وأحسن الهدي هدي محمد صلى الله عليه وسلم...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection(2)">التالي ←</button>
+                <button class="nav-btn" disabled>→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 1</div>
+        </div>
+
+        <div id="section-2" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">باب في وجوب اتباع السنة</h2>
+            <div class="arabic-text">
+                <p>قال الله تعالى: ﴿وَمَا آتَاكُمُ الرَّسُولُ فَخُذُوهُ وَمَا نَهَاكُمْ عَنْهُ فَانْتَهُوا﴾...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection(3)">التالي ←</button>
+                <button class="nav-btn" onclick="showSection(1)">→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 2</div>
+        </div>
+
+        <div id="section-3" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">باب في بيان أهمية السنة</h2>
+            <div class="arabic-text">
+                <p>محتوى الباب...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection(4)">التالي ←</button>
+                <button class="nav-btn" onclick="showSection(2)">→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 3</div>
+        </div>
+
+        <div id="section-4" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">الرد على شبهات المنكرين</h2>
+            <div class="arabic-text">
+                <p>محتوى الباب...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection(5)">التالي ←</button>
+                <button class="nav-btn" onclick="showSection(3)">→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 4</div>
+        </div>
+
+        <div id="section-5" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">باب في حجية الحديث</h2>
+            <div class="arabic-text">
+                <p>محتوى الباب...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection(6)">التالي ←</button>
+                <button class="nav-btn" onclick="showSection(4)">→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 5</div>
+        </div>
+
+        <div id="section-6" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">باب في علوم الحديث</h2>
+            <div class="arabic-text">
+                <p>محتوى الباب...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection(7)">التالي ←</button>
+                <button class="nav-btn" onclick="showSection(5)">→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 6</div>
+        </div>
+
+        <div id="section-7" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">الرد على المستشرقين</h2>
+            <div class="arabic-text">
+                <p>محتوى الباب...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection(8)">التالي ←</button>
+                <button class="nav-btn" onclick="showSection(6)">→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 7</div>
+        </div>
+
+        <div id="section-8" class="content-section">
+            <button class="nav-btn back-to-index" onclick="showIndex()">← العودة للفهرس</button>
+            <h2 class="section-title">الخاتمة</h2>
+            <div class="arabic-text">
+                <p>محتوى الخاتمة...</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" disabled>التالي ←</button>
+                <button class="nav-btn" onclick="showSection(7)">→ السابق</button>
+            </div>
+            <div class="page-number">صفحة 8</div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        const totalSections = 8;
+
+        function showSection(num) {
+            // إخفاء الفهرس
+            document.getElementById('index').style.display = 'none';
+            
+            // إخفاء جميع الأقسام
+            for (let i = 1; i <= totalSections; i++) {
+                document.getElementById('section-' + i).classList.remove('active');
+            }
+            
+            // إظهار القسم المطلوب
+            document.getElementById('section-' + num).classList.add('active');
+            currentSection = num;
+            
+            // التمرير لأعلى الصفحة
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showIndex() {
+            // إخفاء جميع الأقسام
+            for (let i = 1; i <= totalSections; i++) {
+                document.getElementById('section-' + i).classList.remove('active');
+            }
+            
+            // إظهار الفهرس
+            document.getElementById('index').style.display = 'block';
+            currentSection = 0;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // دعم لوحة المفاتيح للتنقل
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentSection > 1) {
+                showSection(currentSection - 1);
+            } else if (e.key === 'ArrowRight' && currentSection < totalSections && currentSection > 0) {
+                showSection(currentSection + 1);
+            } else if (e.key === 'Escape') {
+                showIndex();
+            }
+        });
+    </script>
+</body>
+</html>
