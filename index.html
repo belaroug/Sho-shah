@@ -2,86 +2,419 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>الموسوعة التفاعلية لنقد أصول منكري السنة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --dark-green: #064420;
+            --primary-green: #064420;
+            --dark-green: #0d3328;
+            --light-green: #e8f5e9;
             --gold: #c4a484;
+            --gold-light: #f4e4bc;
             --soft-white: #f9f7f7;
-            --shadow: 0 12px 24px rgba(0,0,0,0.15);
+            --text-dark: #2c3e50;
+            --text-light: #546e7a;
+            --accent-red: #c0392b;
+            --accent-blue: #2980b9;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
         }
-        body {
-            font-family: 'Amiri', serif, 'Segoe UI';
-            background-color: #fdfdfd;
-            line-height: 1.8;
+
+        * {
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Tajawal', 'Amiri', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+            line-height: 1.8;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
         .container {
             max-width: 1200px;
-            margin: auto;
+            margin: 0 auto;
             background: #fff;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid #eee;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
         }
+
+        /* Header Styles */
         header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+            padding: 40px 20px;
             text-align: center;
-            border-bottom: 2px solid var(--gold);
-            margin-bottom: 40px;
-            padding-bottom: 20px;
+            position: relative;
+            overflow: hidden;
         }
-        h1 { color: var(--dark-green); font-size: 2.8em; margin: 0; }
-        .badge { background: var(--dark-green); color: white; padding: 4px 12px; border-radius: 5px; font-size: 0.9em; }
-        
-        .main-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
-        
-        details {
-            background: #fff;
-            border: 1px solid #e1e8ed;
-            border-radius: 12px;
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark-green);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: var(--soft-white);
+            padding: 10px;
+            gap: 8px;
+            border-bottom: 2px solid var(--gold-light);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            flex-shrink: 0;
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
             transition: all 0.3s ease;
+            color: var(--text-light);
         }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 30px 20px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accordion Styles */
+        details {
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: var(--radius-md);
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        details:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold);
+        }
+
+        details[open] {
+            border: 2px solid var(--gold);
+            box-shadow: var(--shadow-md);
+        }
+
         summary {
             padding: 20px;
-            font-size: 1.3em;
-            font-weight: bold;
+            font-size: 1.1em;
+            font-weight: 700;
             cursor: pointer;
             list-style: none;
-            color: var(--dark-green);
+            color: var(--primary-green);
             display: flex;
             align-items: center;
-            border-radius: 12px;
+            justify-content: space-between;
+            background: linear-gradient(to left, white, var(--soft-white));
+            transition: all 0.3s ease;
         }
-        summary::before { content: "➕"; margin-left: 15px; font-size: 0.8em; }
-        details[open] summary::before { content: "➖"; }
-        details[open] { border: 2px solid var(--gold); }
-        details[open] summary { background: var(--soft-white); border-bottom: 1px solid #eee; }
 
-        .node-content { padding: 25px; border-right: 4px solid var(--gold); margin: 15px; background: #fafafa; }
-        .sub-title { color: #8b4513; font-weight: bold; display: block; margin-top: 15px; border-bottom: 1px dashed #ccc; }
-        
-        .response-card {
-            background: #eef7ee;
-            border-left: 5px solid #27ae60;
+        summary::after {
+            content: "+";
+            font-size: 1.5em;
+            color: var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        details[open] summary::after {
+            content: "−";
+            transform: rotate(180deg);
+        }
+
+        details[open] summary {
+            background: var(--light-green);
+            border-bottom: 2px solid var(--gold-light);
+        }
+
+        .node-content {
             padding: 20px;
-            margin-top: 15px;
-            border-radius: 0 10px 10px 0;
+            background: #fafafa;
         }
-        .response-card strong { color: #1e5631; display: block; margin-bottom: 8px; font-size: 1.1em; }
 
+        /* Challenge & Response Cards */
         .challenge-box {
-            background: #fff3f3;
-            border: 1px solid #fab1a0;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
+            background: linear-gradient(to right, #fff5f5, #fff);
+            border-right: 4px solid var(--accent-red);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
         }
-        .info-tag { font-size: 0.85em; color: #7f8c8d; display: block; margin-bottom: 10px; }
-        
-        .footer-note { text-align: center; margin-top: 50px; font-size: 0.9em; color: #95a5a6; }
+
+        .challenge-title {
+            color: var(--accent-red);
+            font-weight: 800;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .challenge-title::before {
+            content: "⚠️";
+        }
+
+        .response-card {
+            background: linear-gradient(to right, #e8f5e9, #fff);
+            border-right: 4px solid #27ae60;
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-top: 15px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .response-title {
+            color: #1e5631;
+            font-weight: 800;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .response-title::before {
+            content: "✓";
+            background: #27ae60;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+        }
+
+        .info-tag {
+            display: inline-block;
+            background: var(--gold-light);
+            color: var(--dark-green);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .sub-title {
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 1.2em;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sub-title::before {
+            content: "📌";
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-right: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        li::marker {
+            color: var(--gold);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--gold-light) 0%, #fff 100%);
+            border: 2px solid var(--gold);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9em;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .update-date {
+            color: var(--gold);
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .subtitle {
+                font-size: 0.95em;
+            }
+
+            .nav-tabs {
+                padding: 8px;
+            }
+
+            .nav-tab {
+                padding: 10px 15px;
+                font-size: 0.85em;
+            }
+
+            .content-area {
+                padding: 20px 15px;
+            }
+
+            summary {
+                padding: 15px;
+                font-size: 1em;
+            }
+
+            .node-content {
+                padding: 15px;
+            }
+
+            .challenge-box, .response-card {
+                padding: 15px;
+            }
+
+            .challenge-title, .response-title {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.4em;
+            }
+
+            .badge {
+                font-size: 0.75em;
+            }
+
+            summary {
+                font-size: 0.95em;
+            }
+
+            .sub-title {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: var(--gold);
+            color: var(--dark-green);
+        }
     </style>
 </head>
 <body>
@@ -89,102 +422,608 @@
 <div class="container">
     <header>
         <span class="badge">الإصدار الموسع 2026</span>
-        <h1>الفهرس المشجر التفاعلي لنقض مذهب منكري السنة</h1>
-        <p>تحليل مجهري للشبهات، المنهجيات النقدية، والأصول التاريخية</p>
+        <h1>الموسوعة التفاعلية لنقد أصول منكري السنة</h1>
+        <p class="subtitle">تحليل مجهري للشبهات، المنهجيات النقدية، والأصول التاريخية</p>
     </header>
 
-    <div class="main-grid">
+    <nav class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('section1')">الأسئلة التعجيزية</button>
+        <button class="nav-tab" onclick="showSection('section2')">الأصول التاريخية</button>
+        <button class="nav-tab" onclick="showSection('section3')">نقد المتن</button>
+        <button class="nav-tab" onclick="showSection('section4')">الأبعاد السياسية</button>
+        <button class="nav-tab" onclick="showSection('section5')">التأصيل الأصولي</button>
+    </nav>
 
-        <details open>
-            <summary>المحور الأول: الأسئلة العشرة التعجيزية (الاستدلال السبر والتقسيم)</summary>
-            <div class="node-content">
-                <span class="info-tag">المصدر: فيديو "10 أسئلة تثبت بطلان مذهب منكري السنة"</span>
-                
-                <div class="challenge-box">
-                    <strong>1. سؤال الشعائر والعبادات:</strong> كيف تقيم الصلاة (الركعات، السجدات، الأوقات) وتؤدي الزكاة (الأنصبة، المقادير) وتحج البيت (المناسك، الترتيب)؟ 
-                    <p class="response-card"><strong>الرد:</strong> القرآن أمر بالصلاة والزكاة كـ "أصول"، والسنة هي "الكتالوج" التطبيقي. إنكار السنة يعني تعطيل 90% من ممارسة الدين العملية.</p>
-                </div>
-
-                <div class="challenge-box">
-                    <strong>2. سؤال حفظ الذكر:</strong> الله قال {إنا نحن نزلنا الذكر وإنا له لحافظون}. هل البيان (السنة) محفوظ أم ضائع؟
-                    <p class="response-card"><strong>الرد:</strong> إذا ضاع البيان، أصبح النص الأصلي (القرآن) مبهماً وغير قابل للتطبيق، وهذا يقدح في حكمة الله وفي وعده بحفظ الدين.</p>
-                </div>
-
-                <div class="challenge-box">
-                    <strong>3. سؤال النسخ والتخصيص:</strong> كيف تفهم آيات عامة خصصتها السنة، أو أحكاماً نسختها؟
-                    <p class="response-card"><strong>الرد:</strong> الاستقلال بالقرآن دون فهم السياق النبوي يؤدي لتخبط تشريعي يحل الحرام ويحرم الحلال (مثل تحريم الميتة الذي خصصته السنة بالسمك والجراد).</p>
-                </div>
+    <div class="content-area">
+        
+        <!-- المحور الأول: الأسئلة العشرة التعجيزية -->
+        <div id="section1" class="section active">
+            <div class="highlight-box">
+                <p>المحور الأول: الأسئلة العشرة التعجيزية (الاستدلال السبر والتقسيم)</p>
             </div>
-        </details>
 
-        <details>
-            <summary>المحور الثاني: نقد الأصول التاريخية (شبهة التدوين والتوثيق)</summary>
-            <div class="node-content">
-                <span class="sub-title">1. أسطورة "القرن الثالث الهجري"</span>
-                <p>يدعي المنكرون أن البخاري ومسلم هم أول من دونوا الحديث بعد قرنين.</p>
-                <div class="response-card">
-                    <strong>التصحيح التاريخي:</strong> التدوين مر بمراحل: الكتابة في عهد النبي (الصحف الفردية) -> التدوين الرسمي في عهد عمر بن عبد العزيز -> التصنيف المسند (الموطأ) -> الجوامع (البخاري). الفارق الزمني كان "للتنقية" وليس "للاختراع".
-                </div>
+            <details open>
+                <summary>السؤال الأول: شعائر العبادات</summary>
+                <div class="node-content">
+                    <span class="info-tag">المصدر: فيديو "10 أسئلة تثبت بطلان مذهب منكري السنة"</span>
+                    
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف تقيم الصلاة (الركعات، السجدات، الأوقات) وتؤدي الزكاة (الأنصبة، المقادير) وتحج البيت (المناسك، الترتيب)؟</p>
+                    </div>
 
-                <span class="sub-title">2. منهجية "الإسناد" الفريدة</span>
-                <p>الاعتماد على الرواية الشفهية يورث الشك.</p>
-                <div class="response-card">
-                    <strong>الرد المنهجي:</strong> الإسلام هو الأمة الوحيدة التي اخترعت "علم الرجال". كل كلمة في البخاري لها "سجل مدني" للرواة، يُفحص فيه صدقهم، قوتهم الذهنية، ومعاصرتهم لبعضهم.
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>القرآن الكريم أمر بالصلاة والزكاة والحج كـ<strong>"أصول"</strong> تشريعية، والسنة النبوية هي <strong>"الكتالوج التطبيقي"</strong> الذي يبين كيفية الأداء. إنكار السنة يعني:</p>
+                        <ul>
+                            <li>تعطيل <strong>90%</strong> من ممارسة الدين العملية</li>
+                            <li>جعل القرآن نصاً نظرياً غير قابل للتنفيذ</li>
+                            <li>إبطال أحكام فقهية مؤكدة بالإجماع</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>مثال عملي:</strong> القرآن يأمر بالصلاة 83 مرة، لكنه لم يحدد عدد الركعات، ولا كيفية الركوع والسجود. كل هذا مأخوذ من السنة المطهرة.</p>
+                    </div>
                 </div>
+            </details>
+
+            <details>
+                <summary>السؤال الثاني: حفظ الذكر</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>الله قال {إنا نحن نزلنا الذكر وإنا له لحافظون}. هل البيان (السنة) محفوظ أم ضائع؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>هذه الآية تتضمن <strong>حفظاً شاملاً</strong> للدين بأجزائه:</p>
+                        <ul>
+                            <li><strong>القرآن:</strong> المحفوظ بالنص</li>
+                            <li><strong>السنة:</strong> المحفوظة بالمعنى والفهم</li>
+                        </ul>
+                        <p style="margin-top: 15px;">إذا ضاع البيان (السنة)، أصبح النص الأصلي (القرآن) <strong>مبهماً وغير قابل للتطبيق</strong>، وهذا يقدح في:</p>
+                        <ul>
+                            <li>حكمة الله في إنزال الدين</li>
+                            <li>وعده بحفظ الذكر</li>
+                            <li>إمكانية العبادة الصحيحة</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال الثالث: النسخ والتخصيص</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف تفهم آيات عامة خصصتها السنة، أو أحكاماً نسختها؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>الاستقلال بالقرآن دون فهم السياق النبوي يؤدي إلى <strong>تخبط تشريعي</strong> خطير:</p>
+                        <ul>
+                            <li><strong>تحريم الميتة:</strong> القرآن حرمها عامة، لكن السنة خصصت بالسمك والجراد</li>
+                            <li><strong>الوضوء:</strong> آيات الوضوء عامة، والسنة بينت تفاصيل المسح والغسل</li>
+                            <li><strong>الصيام:</strong> السنة بينت مفطرات الصيام التي لا تظهر في القرآن صراحة</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>النتيجة:</strong> يحل الحرام ويحرم الحلال، ويفسد الدين باسم الدين.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال الرابع: التشريع النبوي</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>هل يجوز للنبي أن يشرع بغير وحي؟ وما معنى {ما ينطق عن الهوى}؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>آيات صريحة تؤكد أن حديث النبي <strong>وحي</strong>:</p>
+                        <ul>
+                            <li>{وما ينطق عن الهوى * إن هو إلا وحي يوحى}</li>
+                            <li>{وما آتاكم الرسول فخذوه وما نهاكم عنه فانتهوا}</li>
+                            <li>{فليحذر الذين يخالفون عن أمره أن تصيبهم فتنة}</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الفرق العلمي:</strong> الوحي المتلو (القرآن) والوحي غير المتلو (السنة). كلاهما من الله، لكن أحدهما متلو في الصلاة، والآخر ليس بمتلو.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال الخامس: العبادات الجماعية</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف يؤدى الجمعة والجماعات والأعياد والجنائز؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>كل عبادات الجماع في الإسلام <strong>مفصلة بالسنة</strong>:</p>
+                        <ul>
+                            <li><strong>صلاة الجمعة:</strong> وقتها، خطبتها، عدد ركعاتها، كلها من السنة</li>
+                            <li><strong>صلاة العيد:</strong> كيفيتها، وقتها، خطبتها</li>
+                            <li><strong>صلاة الجنازة:</strong> أفعالها، أذكارها، عدد تكبيراتها</li>
+                            <li><strong>الجماعة:</strong> مكان الإمام، صفوف المصلين، أذكار الجماعة</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>السؤال المحير:</strong> هل يعقل أن يترك الله هذه العبادات الجماعية المهمة بلا تفصيل؟</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال السادس: الأحكام القضائية</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف يحكم بين الناس في الميراث والزكاة والحدود؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>القضاء الإسلامي <strong>يعجز</strong> بدون السنة:</p>
+                        <ul>
+                            <li><strong>الميراث:</strong> القرآن ذكر الأسهم، لكن السنة بينت التفاصيل والأولويات والعائدات</li>
+                            <li><strong>الحدود:</strong> شروط إقامتها، طرق إثباتها، موانعها، كلها في السنة</li>
+                            <li><strong>الديات:</strong> تقديرها، صرفها، أولوياتها</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>مثال:</strong> القرآن ذكر حد السرقة، لكن السنة بينت <strong>النصاب</strong> (القيمة التي تبرر الحد) وهو ربع دينار فأكثر.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال السابع: المعاملات المالية</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف تباع وتشترى بدون بيانات السنة في البيوع والمعاملات؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>الاقتصاد الإسلامي <strong>مبني على السنة</strong>:</p>
+                        <ul>
+                            <li><strong>الربا:</strong> أنواعه، صوره، الحلول الشرعية (المرابحة، المضاربة)</li>
+                            <li><strong>البيوع:</strong> بيع السلم، البيع بالتقسيط، البيع بالهامش</li>
+                            <li><strong>الإجارة:</strong> حقوق العامل، حقوق المؤجر، شروط العقد</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الواقع:</strong> بدون السنة، تنهار كل المعاملات الاقتصادية وتختلط الحلال بالحرام.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال الثامن: الأحوال الشخصية</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف يتم الزواج والطلاق والرضاع والنفقات؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>الأسرة الإسلامية <strong>مبنية بالكامل</strong> على السنة:</p>
+                        <ul>
+                            <li><strong>النكاح:</strong> صيغته، شهوده، الولي، المهر، الشروط</li>
+                            <li><strong>الطلاق:</strong> أنواعه، عدته، الرجعة، الإيلاء، الظهار</li>
+                            <li><strong>الرضاع:</strong> حرمة الرضاع، شروطه، مدته</li>
+                            <li><strong>النفقة:</strong> على من تجب، قدرها، وقت أدائها</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>القرآن يأمر:</strong> {فَانكِحُوا مَا طَابَ لَكُم مِّنَ النِّسَاءِ}، لكن السنة بينت <strong>كيفية</strong> النكاح الصحيح.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال التاسع: الجهاد والحدود</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف يؤدى الجهاد وتحمى البيضاء وإقامة الحدود؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>السياسة الشرعية والدفاع <strong>تفصيلها سنة</strong>:</p>
+                        <ul>
+                            <li><strong>الجهاد:</strong> شروطه، آدابه، الأهداف المشروعة، المعاهدات</li>
+                            <li><strong>الحدود:</strong> قصاص، ديات، سجن، تعزير</li>
+                            <li><strong>الجزية:</strong> على من تجب، كيفية أخذها، شروطها</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>النتيجة:</strong> بدون السنة، يصبح الجهاد فوضى عسكرية، والحدود ظلماً، والسياسة شرعية عاجزة.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>السؤال العاشر: الأخلاق والآداب</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف يتربى المسلم على الأخلاق والآداب بدون السنة؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>التربية الإسلامية <strong>منبعها السنة</strong>:</p>
+                        <ul>
+                            <li><strong>آداب الطعام:</strong> الدعاء، الأكل باليمين، المضغ، الشرب</li>
+                            <li><strong>آداب النوم:</strong> الوضوء، الدعاء، الاضطجاع</li>
+                            <li><strong>آداب السلام:</strong> كيفيته، من يبدأ، آدابه</li>
+                            <li><strong>آداب المسجد:</strong> الدخول، الخروج، الأذكار، آداب الجلوس</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الخلاصة:</strong> السنة هي <strong>المنهج العملي</strong> للقرآن، بدونها يبقى الإسلام نظرياً.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- المحور الثاني: نقد الأصول التاريخية -->
+        <div id="section2" class="section">
+            <div class="highlight-box">
+                <p>المحور الثاني: نقد الأصول التاريخية (شبهة التدوين والتوثيق)</p>
             </div>
-        </details>
 
-        <details>
-            <summary>المحور الثالث: نقد "نقد المتن" (المنهجية العلمية ضد الأهواء)</summary>
-            <div class="node-content">
-                <span class="sub-title">1. تهافت الطعن العلمي (التجريبية المادية)</span>
-                <p>رد أحاديث (مثل حديث الذباب أو سجود الشمس) بدعوى مخالفتها للعلم الحديث.</p>
-                <div class="response-card">
-                    <strong>الرد:</strong> العلم التجريبي مبني على "الرصد الحالي" وهو متغير. نقد الحديث بمعيار علمي لحظي هو "جهل بمراتب العلوم". الحديث الصحيح وحي، والوحي لا يصادم العقل القطعي، بل يصادم "التصورات البشرية القاصرة".
+            <details open>
+                <summary>شبهة القرن الثالث الهجري</summary>
+                <div class="node-content">
+                    <span class="info-tag">الشبهة الأكثر انتشاراً بين المنكرين</span>
+                    
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>يدعي المنكرون أن البخاري ومسلم هم أول من دونوا الحديث بعد قرنين من وفاة النبي صلى الله عليه وسلم، مما يعني فقدان المصداقية.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد التاريخي المفصل:</div>
+                        <p>التدوين مر بـ <strong>خمس مراحل تاريخية</strong> متصلة:</p>
+                        <ol>
+                            <li><strong>عهد النبي ﷺ:</strong> الكتابة في الصحف الفردية (وصية النبي لعبد الله بن عمرو)</li>
+                            <li><strong>عهد الصحابة:</strong> تدوين الأحاديث في الصحف والرقاع</li>
+                            <li><strong>عهد عمر بن عبد العزيز:</strong> الأمر الرسمي الأول بالتدوين (101 هـ)</li>
+                            <li><strong>عهد التابعين:</strong> التصنيف المسند (الموطأ للإمام مالك)</li>
+                            <li><strong>عهد الأئمة:</strong> الجوامع والصحاح (البخاري، مسلم، الترمذي، النسائي، ابن ماجه)</li>
+                        </ol>
+                        <p style="margin-top: 15px;"><strong>الفارق الزمني:</strong> كان <strong>للتنقية والتخريج</strong> وليس للاختراع. العلماء لم يبدأوا من الصفر، بل نظموا ما كان موجوداً.</p>
+                    </div>
                 </div>
+            </details>
 
-                <span class="sub-title">2. ضوابط نقد المتن عند الأوائل</span>
-                <p>يُزعم أن المحدثين لم ينقدوا النصوص بل السند فقط.</p>
-                <div class="response-card">
-                    <strong>الرد:</strong> وضع المحدثون 5 شروط للصحة، منها (عدم الشذوذ) و(عدم العلة)، وهي شروط موجهة للمتن والسند معاً. فإذا خالف الحديث صريح القرآن أو أصول الدين، رُدَّ متنه فوراً.
+            <details>
+                <summary>شبهة الرواية الشفهية</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>الاعتماد على الرواية الشفهية يورث الشك والخطأ، خاصة مع طول السند.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد المنهجي المفصل:</div>
+                        <p>الإسلام هو الأمة الوحيدة التي اخترعت <strong>"علم الرجال"</strong>:</p>
+                        <ul>
+                            <li><strong>الجرح والتعديل:</strong> فحص كل راوٍ في سند الحديث</li>
+                            <li><strong>التوثيق المزدوج:</strong> كل حديث له سند متصل إلى النبي ﷺ</li>
+                            <li><strong>العلل والمخالفات:</strong> كشف الأخطاء في السند والمتن</li>
+                            <li><strong>الكتب المبكرة:</strong> "التاريخ الكبير" للبخاري يوثق 15,000+ راوٍ</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>المقارنة:</strong> التاريخ اليوناني والروماني يعتمد على رواة مجهولين، بينما الحديث يعتمد على <strong>سجل مدني دقيق</strong> لكل راوٍ.</p>
+                    </div>
                 </div>
-            </div>
-        </details>
+            </details>
 
-        <details>
-            <summary>المحور الرابع: الأبعاد السياسية والفكرية (لماذا ينكرون؟)</summary>
-            <div class="node-content">
-                <ul>
-                    <li><strong>تفكيك المرجعية:</strong> جعل النص الديني "سيالاً" يخضع لتفسير كل شخص حسب هواه المعاصر.</li>
-                    <li><strong>التبعية للحضارة الغربية:</strong> محاولة "عصرنة" الإسلام بحذف كل ما لا يتوافق مع القيم الليبرالية المادية المتمثلة في السنة.</li>
-                    <li><strong>المنهجية الليبية (نموذجاً):</strong> دراسة أثر الشبهات على المجتمعات وكيف تسببت في ظهور "دين جديد" مفرغ من المحتوى التعبدي.</li>
-                </ul>
-            </div>
-        </details>
+            <details>
+                <summary>شبهة التحريف والتبديل</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>كيف نضمن عدم تحريف الأحاديث عبر القرون؟</p>
+                    </div>
 
-        <details>
-            <summary>المحور الخامس: التأصيل الأصولي (حجية السنة في القرآن)</summary>
-            <div class="node-content">
-                <p>الرد من داخل النص القرآني الذي يزعمون التمسك به:</p>
-                <div class="response-card">
-                    <strong>أدلة وجوب الاتباع:</strong>
-                    <ul>
-                        <li>آيات الطاعة المطلقة: {وأطيعوا الله وأطيعوا الرسول}.</li>
-                        <li>آية التبيين: {لتبين للناس ما نزل إليهم}؛ فالمبين غير المبيَّن.</li>
-                        <li>آية الحكمة: {ويعلمهم الكتاب والحكمة}؛ الحكمة هنا هي السنة بإجماع السلف والشافعي.</li>
-                    </ul>
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>هناك <strong>آليات ضمان</strong> متعددة:</p>
+                        <ul>
+                            <li><strong>التواتر:</strong> الأحاديث المتواترة (مثل أحاديث الصلاة) لا يمكن تزويرها</li>
+                            <li><strong>الشهرة العملية:</strong> الأحاديث التي عمل بها المسلمون قروناً</li>
+                            <li><strong>النقد العلمي:</strong> علماء الجرح والتعديل راقبوا الرواة</li>
+                            <li><strong>المقارنة بين الطرق:</strong> كل حديث يروى بطرق متعددة للتحقق</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>النتيجة:</strong> الصحيحان (البخاري ومسلم) هما أصح كتاب بعد القرآن بإجماع الأمة.</p>
+                    </div>
                 </div>
+            </details>
+        </div>
+
+        <!-- المحور الثالث: نقد المتن -->
+        <div id="section3" class="section">
+            <div class="highlight-box">
+                <p>المحور الثالث: نقد "نقد المتن" (المنهجية العلمية ضد الأهواء)</p>
             </div>
-        </details>
+
+            <details open>
+                <summary>الطعن بالعلم التجريبي</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>رد أحاديث (مثل حديث الذباب أو سجود الشمس) بدعوى مخالفتها للعلم الحديث.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>هذا الطعن قائم على <strong>جهل بمراتب العلوم</strong>:</p>
+                        <ul>
+                            <li><strong>العلم التجريبي:</strong> مبني على "الرصد الحالي" وهو <strong>متغير</strong></li>
+                            <li><strong>الوحي:</strong> ثابت قطعي من عالم الغيب</li>
+                            <li><strong>العلاقة:</strong> الوحي لا يصادم العقل القطعي، بل يصادم "التصورات البشرية القاصرة"</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>أمثلة:</strong></p>
+                        <ul>
+                            <li>حديث الذباب: أثبت العلم الحديث وجود مضادات حيوية في جسد الذباب</li>
+                            <li>سجود الشمس: علم الفلك الحديث يثبت أن الشمس تسجد تحت العرش (مركز المجموعة الشمسية)</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>شبهة عدم نقد المتن</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>يُزعم أن المحدثين لم ينقدوا النصوص بل السند فقط.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>وضع المحدثون <strong>5 شروط للصحة</strong> موجهة للمتن والسند معاً:</p>
+                        <ol>
+                            <li><strong>اتصال السند:</strong> كل راوٍ أخذ عن من قبله</li>
+                            <li><strong>ضبط الرواة:</strong> الضبط الصحيح للحديث</li>
+                            <li><strong>عدم الشذوذ:</strong> عدم مخالفة رواة الثقة</li>
+                            <li><strong>عدم العلة:</strong> الخلل الخفي في السند</li>
+                            <li><strong>صحة المتن:</strong> عدم مخالفة القرآن والسنة الصحيحة</li>
+                        </ol>
+                        <p style="margin-top: 15px;"><strong>القاعدة:</strong> إذا خالف الحديث صريح القرآن أو أصول الدين، رُد متنه فوراً.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>شبهة الأحاديث "الضعيفة"</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الشبهة:</div>
+                        <p>وجود أحاديث ضعيفة في الكتب المعتمدة يضعف من مصداقية السنة.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الرد العلمي المفصل:</div>
+                        <p>هذا يدل على <strong>صدق العلماء</strong> ونزاهتهم:</p>
+                        <ul>
+                            <li><strong>التصنيف:</strong> علماء الحديث صنفوا الأحاديث (صحيح، حسن، ضعيف، موضوع)</li>
+                            <li><strong>الصحيحان:</strong> البخاري ومسلم يحتويان على أصح الأحاديث</li>
+                            <li><strong>الضعيف:</strong> يُستخدم للاستئناس والفضائل، لا للأحكام</li>
+                            <li><strong>الموضوع:</strong> يُبين ويُحذر منه</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الشاهد:</strong> وجود الضعيف دليل على <strong>النقد العلمي</strong>، لا على التزوير.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- المحور الرابع: الأبعاد السياسية -->
+        <div id="section4" class="section">
+            <div class="highlight-box">
+                <p>المحور الرابع: الأبعاد السياسية والفكرية (لماذا ينكرون؟)</p>
+            </div>
+
+            <details open>
+                <summary>تفكيك المرجعية الدينية</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الهدف الخفي:</div>
+                        <p>جعل النص الديني "سيالاً" يخضع لتفسير كل شخص حسب هواه المعاصر.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">التحليل السياسي:</div>
+                        <p>إنكار السنة يهدف إلى:</p>
+                        <ul>
+                            <li><strong>إفراغ الإسلام من المحتوى:</strong> جعله نصوصاً عامة لا تفصيل فيها</li>
+                            <li><strong>تفكيك السلطة الدينية:</strong> إلغاء دور العلماء والمرجعيات</li>
+                            <li><strong>التحرر من الأحكام:</strong> إباحة ما حرم الله باسم "العصرنة"</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>النتيجة:</strong> ظهور "دين جديد" مفرغ من المحتوى التعبدي والأخلاقي.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>التبعية للحضارة الغربية</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الظاهرة:</div>
+                        <p>محاولة "عصرنة" الإسلام بحذف كل ما لا يتوافق مع القيم الليبرالية المادية.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">التحليل الفكري:</div>
+                        <p>هذا المنهج يعكس:</p>
+                        <ul>
+                            <li><strong>عقدة النقص:</strong> رؤية الغرب كمعيار للتقدم</li>
+                            <li><strong>العلمانية المقنعة:</strong> فصل الدين عن الحياة العملية</li>
+                            <li><strong>التحرر الأخلاقي:</strong> إباحة الزنا والشذوذ والربا</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الرد:</strong> الإسلام دين شامل، والسنة تحميه من التحريف الزماني والمكاني.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>المنهجية الليبية (دراسة حالة)</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الحالة:</div>
+                        <p>دراسة أثر الشبهات على المجتمعات وكيف تسببت في ظهور "دين جديد".</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">التحليل الميداني:</div>
+                        <p>في بعض المجتمعات:</p>
+                        <ul>
+                            <li><strong>ظهور طوائف جديدة:</strong> ترفض السنة بالكلية</li>
+                            <li><strong>تفكك المجتمع:</strong> فقدان المرجعية الموحدة</li>
+                            <li><strong>الفتاوى الفردية:</strong> كل شخص يفتي لنفسه</li>
+                            <li><strong>الانحلال الأخلاقي:</strong> إباحة المحارم باسم "الاجتهاد"</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الدلالة:</strong> إنكار السنة طريق إلى <strong>الهوية المفقودة</strong> والانتماء المبهم.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- المحور الخامس: التأصيل الأصولي -->
+        <div id="section5" class="section">
+            <div class="highlight-box">
+                <p>المحور الخامس: التأصيل الأصولي (حجية السنة في القرآن)</p>
+            </div>
+
+            <details open>
+                <summary>آيات الطاعة المطلقة</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الدليل القرآني:</div>
+                        <p>أكثر من 50 آية تأمر بطاعة الرسول ﷺ.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الأدلة التفصيلية:</div>
+                        <ul>
+                            <li><strong>{وأطيعوا الله وأطيعوا الرسول}:</strong> طاعة الرسول مقرونة بطاعة الله</li>
+                            <li><strong>{وما آتاكم الرسول فخذوه}:</strong> وجوب أخذ ما يأتي به الرسول</li>
+                            <li><strong>{فليحذر الذين يخالفون عن أمره}:</strong> تحذير شديد للمخالفين</li>
+                            <li><strong>{وما كان لمؤمن ولا مؤمنة إذا قضى الله ورسوله أمراً}:</strong> حجية قضاء الرسول</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الاستدلال:</strong> هذه الآيات تجعل طاعة الرسول <strong>طاعة لله</strong>، ومنكر السنة يعصي الله بإنكاره.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>آية التبيين</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الدليل القرآني:</div>
+                        <p>{وأنزلنا إليك الذكر لتبين للناس ما نزل إليهم}.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">التحليل الأصولي:</div>
+                        <p>هذه الآية تثبت:</p>
+                        <ul>
+                            <li><strong>وظيفة البيان:</strong> النبي ﷺ مبين للقرآن</li>
+                            <li><strong>الفارق:</strong> المبين (السنة) غير المبيَّن (القرآن)</li>
+                            <li><strong>الحكمة:</strong> لماذا لم يُنزل القرآن مفصلاً؟ ليكون النبي ﷺ مدرسة عملية</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>النتيجة:</strong> إنكار السنة يعني إنكار <strong>وظيفة النبي ﷺ</strong> في التبيين.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>آية الحكمة</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الدليل القرآني:</div>
+                        <p>{ويعلمهم الكتاب والحكمة}.</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">التحليل الأصولي:</div>
+                        <p>الحكمة هنا هي <strong>السنة</strong> بإجماع السلف والشافعي:</p>
+                        <ul>
+                            <li><strong>ابن عباس:</strong> "الحكمة هي السنة"</li>
+                            <li><strong>الشافعي:</strong> "الحكمة هي خبر النبي ﷺ"</li>
+                            <li><strong>القرطبي:</strong> "الحكمة ما حكم به النبي ﷺ"</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>الدلالة:</strong> القرآن يأمر بتعليم السنة كما يأمر بتعليم الكتاب.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>إجماع الأمة</summary>
+                <div class="node-content">
+                    <div class="challenge-box">
+                        <div class="challenge-title">الدليل التاريخي:</div>
+                        <p>هل هناك إجماع من الصحابة على حجية السنة؟</p>
+                    </div>
+
+                    <div class="response-card">
+                        <div class="response-title">الإجماع المتواتر:</div>
+                        <p>من الصحابة إلى يومنا:</p>
+                        <ul>
+                            <li><strong>الصحابة:</strong> جميعهم أخذوا بالسنة ورووها</li>
+                            <li><strong>التابعون:</strong> تلقوا السنة عن الصحابة</li>
+                            <li><strong>الأئمة الأربعة:</strong> جعلوا السنة مصدراً تشريعياً</li>
+                            <li><strong>الجمهور:</strong> 99% من المسلمين عبر التاريخ</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>القاعدة الأصولية:</strong> "إجماع الأمة لا يحتمل الخطأ".</p>
+                    </div>
+                </div>
+            </details>
+        </div>
 
     </div>
 
-    <div class="footer-note">
-        ➖➖➖➖➖➖➖➖➖<br>
-        ⁉️ هذا الفهرس هو ملخص تركيبي لـ 10 أبحاث علمية رصينة.<br>
-        تمت المراجعة في: 30 مارس 2026.
-    </div>
+    <footer>
+        <div class="footer-content">
+            <p>⁉️ هذا الفهرس هو ملخص تركيبي لـ 10 أبحاث علمية رصينة.</p>
+            <p class="update-date">تمت المراجعة في: 30 مارس 2026</p>
+            <p style="margin-top: 20px; font-size: 0.85em; opacity: 0.8;">
+                الموسوعة التفاعلية لنقد أصول منكري السنة<br>
+                جميع الحقوق محفوظة
+            </p>
+        </div>
+    </footer>
 </div>
+
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Remove active class from all tabs
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        // Show selected section
+        document.getElementById(sectionId).classList.add('active');
+        
+        // Add active class to clicked tab
+        event.target.classList.add('active');
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
