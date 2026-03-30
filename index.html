@@ -3,90 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فهرس تيارات التعامل مع السنة النبوية</title>
+    <title>الموسوعة التفاعلية لنقد أصول منكري السنة</title>
     <style>
+        :root {
+            --dark-green: #064420;
+            --gold: #c4a484;
+            --soft-white: #f9f7f7;
+            --shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Amiri', serif, 'Segoe UI';
+            background-color: #fdfdfd;
+            line-height: 1.8;
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: auto;
             background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid #eee;
         }
-        h1 {
-            color: #2c3e50;
+        header {
             text-align: center;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
         }
-        h2 {
-            color: #e67e22;
-            border-right: 5px solid #e67e22;
-            padding-right: 10px;
-            margin-top: 30px;
+        h1 { color: var(--dark-green); font-size: 2.8em; margin: 0; }
+        .badge { background: var(--dark-green); color: white; padding: 4px 12px; border-radius: 5px; font-size: 0.9em; }
+        
+        .main-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        
+        details {
+            background: #fff;
+            border: 1px solid #e1e8ed;
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
-        .category {
-            margin-bottom: 20px;
+        summary {
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+        }
+        summary::before { content: "➕"; margin-left: 15px; font-size: 0.8em; }
+        details[open] summary::before { content: "➖"; }
+        details[open] { border: 2px solid var(--gold); }
+        details[open] summary { background: var(--soft-white); border-bottom: 1px solid #eee; }
+
+        .node-content { padding: 25px; border-right: 4px solid var(--gold); margin: 15px; background: #fafafa; }
+        .sub-title { color: #8b4513; font-weight: bold; display: block; margin-top: 15px; border-bottom: 1px dashed #ccc; }
+        
+        .response-card {
+            background: #eef7ee;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 0 10px 10px 0;
+        }
+        .response-card strong { color: #1e5631; display: block; margin-bottom: 8px; font-size: 1.1em; }
+
+        .challenge-box {
+            background: #fff3f3;
+            border: 1px solid #fab1a0;
             padding: 15px;
-            border-right: 3px solid #eee;
+            border-radius: 8px;
+            margin: 10px 0;
         }
-        .category strong {
-            color: #2980b9;
-        }
-        p {
-            margin: 5px 0 15px 0;
-        }
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.9em;
-            color: #7f8c8d;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
+        .info-tag { font-size: 0.85em; color: #7f8c8d; display: block; margin-bottom: 10px; }
+        
+        .footer-note { text-align: center; margin-top: 50px; font-size: 0.9em; color: #95a5a6; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>فهرس الاتجاهات الفكرية في التعامل مع السنة</h1>
-    
-    <p style="text-align: center; font-style: italic;">تصنيف منهجي للتيارات التي طرحت تساؤلات أو أنكرت حجية السنة كلياً أو جزئياً</p>
+    <header>
+        <span class="badge">الإصدار الموسع 2026</span>
+        <h1>الفهرس المشجر التفاعلي لنقض مذهب منكري السنة</h1>
+        <p>تحليل مجهري للشبهات، المنهجيات النقدية، والأصول التاريخية</p>
+    </header>
 
-    <h2>1. الإنكار الكلي (القرآنيون)</h2>
-    <div class="category">
-        <strong>الوصف:</strong> تيار يكتفي بالقرآن الكريم كمصدر وحيد للتشريع، بدعوى أن القرآن "تبيان لكل شيء".
-        <p><strong>أبرز الشبهات:</strong> القول بأن السنة لم تدوّن إلا متأخراً، وأنها عرضة للوضع والنسيان.</p>
+    <div class="main-grid">
+
+        <details open>
+            <summary>المحور الأول: الأسئلة العشرة التعجيزية (الاستدلال السبر والتقسيم)</summary>
+            <div class="node-content">
+                <span class="info-tag">المصدر: فيديو "10 أسئلة تثبت بطلان مذهب منكري السنة"</span>
+                
+                <div class="challenge-box">
+                    <strong>1. سؤال الشعائر والعبادات:</strong> كيف تقيم الصلاة (الركعات، السجدات، الأوقات) وتؤدي الزكاة (الأنصبة، المقادير) وتحج البيت (المناسك، الترتيب)؟ 
+                    <p class="response-card"><strong>الرد:</strong> القرآن أمر بالصلاة والزكاة كـ "أصول"، والسنة هي "الكتالوج" التطبيقي. إنكار السنة يعني تعطيل 90% من ممارسة الدين العملية.</p>
+                </div>
+
+                <div class="challenge-box">
+                    <strong>2. سؤال حفظ الذكر:</strong> الله قال {إنا نحن نزلنا الذكر وإنا له لحافظون}. هل البيان (السنة) محفوظ أم ضائع؟
+                    <p class="response-card"><strong>الرد:</strong> إذا ضاع البيان، أصبح النص الأصلي (القرآن) مبهماً وغير قابل للتطبيق، وهذا يقدح في حكمة الله وفي وعده بحفظ الدين.</p>
+                </div>
+
+                <div class="challenge-box">
+                    <strong>3. سؤال النسخ والتخصيص:</strong> كيف تفهم آيات عامة خصصتها السنة، أو أحكاماً نسختها؟
+                    <p class="response-card"><strong>الرد:</strong> الاستقلال بالقرآن دون فهم السياق النبوي يؤدي لتخبط تشريعي يحل الحرام ويحرم الحلال (مثل تحريم الميتة الذي خصصته السنة بالسمك والجراد).</p>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>المحور الثاني: نقد الأصول التاريخية (شبهة التدوين والتوثيق)</summary>
+            <div class="node-content">
+                <span class="sub-title">1. أسطورة "القرن الثالث الهجري"</span>
+                <p>يدعي المنكرون أن البخاري ومسلم هم أول من دونوا الحديث بعد قرنين.</p>
+                <div class="response-card">
+                    <strong>التصحيح التاريخي:</strong> التدوين مر بمراحل: الكتابة في عهد النبي (الصحف الفردية) -> التدوين الرسمي في عهد عمر بن عبد العزيز -> التصنيف المسند (الموطأ) -> الجوامع (البخاري). الفارق الزمني كان "للتنقية" وليس "للاختراع".
+                </div>
+
+                <span class="sub-title">2. منهجية "الإسناد" الفريدة</span>
+                <p>الاعتماد على الرواية الشفهية يورث الشك.</p>
+                <div class="response-card">
+                    <strong>الرد المنهجي:</strong> الإسلام هو الأمة الوحيدة التي اخترعت "علم الرجال". كل كلمة في البخاري لها "سجل مدني" للرواة، يُفحص فيه صدقهم، قوتهم الذهنية، ومعاصرتهم لبعضهم.
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>المحور الثالث: نقد "نقد المتن" (المنهجية العلمية ضد الأهواء)</summary>
+            <div class="node-content">
+                <span class="sub-title">1. تهافت الطعن العلمي (التجريبية المادية)</span>
+                <p>رد أحاديث (مثل حديث الذباب أو سجود الشمس) بدعوى مخالفتها للعلم الحديث.</p>
+                <div class="response-card">
+                    <strong>الرد:</strong> العلم التجريبي مبني على "الرصد الحالي" وهو متغير. نقد الحديث بمعيار علمي لحظي هو "جهل بمراتب العلوم". الحديث الصحيح وحي، والوحي لا يصادم العقل القطعي، بل يصادم "التصورات البشرية القاصرة".
+                </div>
+
+                <span class="sub-title">2. ضوابط نقد المتن عند الأوائل</span>
+                <p>يُزعم أن المحدثين لم ينقدوا النصوص بل السند فقط.</p>
+                <div class="response-card">
+                    <strong>الرد:</strong> وضع المحدثون 5 شروط للصحة، منها (عدم الشذوذ) و(عدم العلة)، وهي شروط موجهة للمتن والسند معاً. فإذا خالف الحديث صريح القرآن أو أصول الدين، رُدَّ متنه فوراً.
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>المحور الرابع: الأبعاد السياسية والفكرية (لماذا ينكرون؟)</summary>
+            <div class="node-content">
+                <ul>
+                    <li><strong>تفكيك المرجعية:</strong> جعل النص الديني "سيالاً" يخضع لتفسير كل شخص حسب هواه المعاصر.</li>
+                    <li><strong>التبعية للحضارة الغربية:</strong> محاولة "عصرنة" الإسلام بحذف كل ما لا يتوافق مع القيم الليبرالية المادية المتمثلة في السنة.</li>
+                    <li><strong>المنهجية الليبية (نموذجاً):</strong> دراسة أثر الشبهات على المجتمعات وكيف تسببت في ظهور "دين جديد" مفرغ من المحتوى التعبدي.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>المحور الخامس: التأصيل الأصولي (حجية السنة في القرآن)</summary>
+            <div class="node-content">
+                <p>الرد من داخل النص القرآني الذي يزعمون التمسك به:</p>
+                <div class="response-card">
+                    <strong>أدلة وجوب الاتباع:</strong>
+                    <ul>
+                        <li>آيات الطاعة المطلقة: {وأطيعوا الله وأطيعوا الرسول}.</li>
+                        <li>آية التبيين: {لتبين للناس ما نزل إليهم}؛ فالمبين غير المبيَّن.</li>
+                        <li>آية الحكمة: {ويعلمهم الكتاب والحكمة}؛ الحكمة هنا هي السنة بإجماع السلف والشافعي.</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
+
     </div>
 
-    <h2>2. الإنكار الجزئي (المدرسة العقلانية الحديثة)</h2>
-    <div class="category">
-        <strong>الوصف:</strong> لا ينكرون السنة جملة، لكنهم يخضعونها لمعايير عقلية أو واقعية صارمة.
-        <p><strong>أبرز الشبهات:</strong> رد أحاديث الآحاد في العقائد، أو رد الأحاديث التي يظنون أنها تتعارض مع العلم الحديث أو "روح العصر".</p>
-    </div>
-
-    <h2>3. تيار نقد المتن (المستشرقون وتلاميذهم)</h2>
-    <div class="category">
-        <strong>الوصف:</strong> التركيز على نقد محتوى الحديث بعيداً عن السند، والتشكيك في صحة الأحاديث بناءً على سياقات سياسية وتاريخية مفترضة.
-        <p><strong>أبرز الشبهات:</strong> الزعم بأن الأحاديث وُضعت لخدمة الأمويين أو العباسيين أو لتبرير مذاهب فقهية معينة.</p>
-    </div>
-
-    <h2>4. منكرو "حجية" السنة التشريعية</h2>
-    <div class="category">
-        <strong>الوصف:</strong> يفرقون بين تصرفات الرسول ﷺ كقائد دولة أو بشر، وبين تصرفاته كمبلغ عن الله.
-        <p><strong>أبرز الشبهات:</strong> حصر السنة في "التصرفات البشرية" غير الملزمة زمنياً، واعتبارها تجربة تاريخية غير عابرة للزمان.</p>
-    </div>
-
-    <div class="footer">
-        <p>تم إعداد هذا الفهرس لأغراض البحث العلمي والاطلاع المنهجي.</p>
+    <div class="footer-note">
+        ➖➖➖➖➖➖➖➖➖<br>
+        ⁉️ هذا الفهرس هو ملخص تركيبي لـ 10 أبحاث علمية رصينة.<br>
+        تمت المراجعة في: 30 مارس 2026.
     </div>
 </div>
 
